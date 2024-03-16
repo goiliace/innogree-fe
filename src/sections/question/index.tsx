@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import FromQuestion from '../../components/FromQuestion';
 import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 const fakeQuestion = [
     { id: 1, text: "Bạn có thường xuyên sử dụng điện thoại không?", answer: "" },
@@ -34,7 +32,7 @@ export default function QuestionSection() {
         console.log(questions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage));
     };
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (value: number) => {
         setCurrentPage(value - 1);
     };
 
@@ -56,7 +54,7 @@ export default function QuestionSection() {
                 <div className="mt-4">
                     <Pagination
                         count={Math.ceil(questions.length / questionsPerPage)}
-                        onChange={handlePageChange}
+                        onChange={(_, value) => handlePageChange(value)}
                     />
                 </div>
                 <button type="submit" className="mt-4">Submit</button>
