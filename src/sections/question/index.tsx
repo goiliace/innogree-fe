@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import FromQuestion from '../../components/FromQuestion';
-import Pagination from '@mui/material/Pagination';
-
-
+import DualLayout from '~/layouts/DualLayout';
+import FromQuestion from '~/components/FromQuestion';
+import QuestionnaireNav from '~/components/QuestionnaireNav';
 const fakeQuestion = [
     { id: 1, text: "Bạn có thường xuyên sử dụng điện thoại không?", answer: "" },
     { id: 2, text: "Question 2 text here", answer: "" },
@@ -18,18 +17,20 @@ const fakeQuestion = [
 
 const questionsPerPage = 5;
 
-export default function QuestionSection() {
+const QuestionSection = () => {
     const [questions, setQuestions] = useState(fakeQuestion);
     const [currentPage, setCurrentPage] = useState(0);
-
+    const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
     const handleChange = (id: number, newAnswer: string) => {
         setQuestions(questions.map(q => q.id === id ? { ...q, answer: newAnswer } : q));
+        setCompletedQuestions(prev => [...prev, id]);
+
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Here you can handle the submission, such as sending the data to a backend API
-        console.log(questions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage));
+        console.log(questions);
     };
 
     const handlePageChange = (value: number) => {
@@ -37,28 +38,23 @@ export default function QuestionSection() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg ">
-                <ul className="space-y-6">
-                    {questions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage).map((question) => (
-                        <li key={question.id} className="flex items-center">
-                            <FromQuestion
-                                id={question.id}
-                                question={question.text}
-                                answer={question.answer}
-                                handleChange={(newAnswer: string) => handleChange(question.id, newAnswer)}
-                            />
-                        </li>
-                    ))}
-                </ul>
-                <div className="mt-4">
-                    <Pagination
-                        count={Math.ceil(questions.length / questionsPerPage)}
-                        onChange={(_, value) => handlePageChange(value)}
-                    />
-                </div>
-                <button type="submit" className="mt-4">Submit</button>
-            </form>
-        </div>
+        <>
+            <DualLayout
+                childrenA={< FromQuestion
+                    questions={questions}
+                    currentPage={currentPage}
+                    questionsPerPage={questionsPerPage}
+                    handleSubmit={handleSubmit}
+                    handleChange={handleChange}
+                    handlePageChange={handlePageChange}
+                />}
+                childrenB={< QuestionnaireNav
+                    questions={questions}
+                    completedQuestions={completedQuestions}
+                    handlePageChange={handlePageChange}
+                />}
+            />
+        </>
     )
 }
+export default QuestionSection;

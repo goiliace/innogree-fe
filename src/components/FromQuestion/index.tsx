@@ -3,13 +3,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import React from 'react';
-
-interface FromQuestionProps {
-    id: number;
-    question: string;
-    answer: string;
-    handleChange: (newAnswer: string) => void;
-}
+import Pagination from '@mui/material/Pagination';
+import { QuestionType, QuestionProps, FromQuestionProps } from './interface';
 
 const values = {
     '0': 'Có',
@@ -17,7 +12,7 @@ const values = {
     '2': 'Không thường xuyên'
 };
 
-const FromQuestion: React.FC<FromQuestionProps> = ({ id, question, answer, handleChange }) => {
+const Question: React.FC<QuestionProps> = ({ id, question, answer, handleChange }) => {
     return (
         <FormControl component="fieldset">
             <span className="text-lg font-semibold">
@@ -41,6 +36,34 @@ const FromQuestion: React.FC<FromQuestionProps> = ({ id, question, answer, handl
             </RadioGroup>
         </FormControl>
     );
+}
+const FromQuestion: React.FC<FromQuestionProps> = ({ questions, currentPage, questionsPerPage, handleSubmit, handleChange, handlePageChange }) => {
+    return (
+        <div>
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg ">
+                <ul className="space-y-6">
+                    {questions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage).map((question: QuestionType) => (
+                        <li key={question.id} className="flex items-center">
+                            <Question
+                                id={question.id}
+                                question={question.text}
+                                answer={question.answer}
+                                handleChange={(newAnswer: string) => handleChange(question.id, newAnswer)}
+                            />
+                        </li>
+                    ))}
+                </ul>
+                <div className="mt-4">
+                    <Pagination
+                        count={Math.ceil(questions.length / questionsPerPage)}
+                        onChange={(_, value) => handlePageChange(value)}
+                        page={currentPage + 1}
+                    />
+                </div>
+                <button type="submit" className="mt-4">Submit</button>
+            </form>
+        </div>
+    )
 }
 
 export default FromQuestion;
