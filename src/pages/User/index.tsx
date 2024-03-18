@@ -1,8 +1,8 @@
-const User = () => {
+import QuestionSection from "~/sections/question"
+export default function App() {
     return (
-        <div>
-            <h1>User</h1>
-        </div>
+        <>
+            <QuestionSection />
+        </>
     )
 }
-export default User
