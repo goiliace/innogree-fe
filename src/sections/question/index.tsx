@@ -13,6 +13,17 @@ const fakeQuestion = [
     { id: 8, text: "Question 8 text here", answer: "" },
     { id: 9, text: "Question 9 text here", answer: "" },
     { id: 10, text: "Question 10 text here", answer: "" },
+    { id: 11, text: "Question 11 text here", answer: "" },
+    { id: 12, text: "Question 12 text here", answer: "" },
+    { id: 13, text: "Question 13 text here", answer: "" },
+    { id: 14, text: "Question 14 text here", answer: "" },
+    { id: 15, text: "Question 15 text here", answer: "" },
+    { id: 16, text: "Question 16 text here", answer: "" },
+    { id: 17, text: "Question 17 text here", answer: "" },
+    { id: 18, text: "Question 18 text here", answer: "" },
+    { id: 19, text: "Question 19 text here", answer: "" },
+    { id: 20, text: "Question 20 text here", answer: "" },
+    { id: 21, text: "Question 21 text here", answer: "" },
 ];
 
 const questionsPerPage = 5;
