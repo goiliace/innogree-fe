@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DualLayout from '~/layouts/DualLayout';
 import FromQuestion from '~/components/FromQuestion';
 import QuestionnaireNav from '~/components/QuestionnaireNav';
+import { useParams } from 'react-router-dom';
 const fakeQuestion = [
     { id: 1, text: "Bạn có thường xuyên sử dụng điện thoại không?", answer: "" },
     { id: 2, text: "Question 2 text here", answer: "" },
@@ -27,8 +28,10 @@ const fakeQuestion = [
 ];
 
 const questionsPerPage = 5;
-
 const QuestionSection = () => {
+    const params = useParams();
+    console.log(params.id);
+
     const [questions, setQuestions] = useState(fakeQuestion);
     const [currentPage, setCurrentPage] = useState(0);
     const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);

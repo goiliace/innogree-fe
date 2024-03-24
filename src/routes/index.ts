@@ -4,12 +4,14 @@ import User from '~/pages/User'
 import Login from '~/pages/Auth/login'
 import SignUp from '~/pages/Auth/signup'
 import Contact from '~/pages/Contact'
+import QuestionSection from '~/sections/question'
 const config = {
   home: '/',
   user: '/user',
   login: '/login',
   register: '/signup',
-  contact: '/contact'
+  contact: '/contact',
+  asqvn: '/user/asqvn/:id'
 }
 
 const routes = [
@@ -41,6 +43,12 @@ const routes = [
     path: config.register,
     exact: true,
     component: SignUp,
+    layout: DefaultLayout
+  },
+  {
+    path: config.asqvn,
+    exact: true,
+    component: QuestionSection,
     layout: DefaultLayout
   }
 ]
