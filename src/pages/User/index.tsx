@@ -1,8 +1,8 @@
-import QuestionSection from "~/sections/question"
+import PatientDashboard from "~/sections/patientDashboard"
 export default function App() {
     return (
         <>
-            <QuestionSection />
+            < PatientDashboard />
         </>
     )
 }
