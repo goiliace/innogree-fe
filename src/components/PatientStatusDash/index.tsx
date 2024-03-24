@@ -1,10 +1,5 @@
-import React from 'react';
-import ReactApexChart from 'react-apexcharts';
+import Chart from 'react-apexcharts';
 
-interface RadarChartProps {
-    data: number[];
-    categories: string[];
-}
 
 
 const PatientStatusDash = () => {
@@ -28,7 +23,6 @@ const PatientStatusDash = () => {
         },
         chart: {
             height: 350,
-            type: 'radar',
             dropShadow: {
                 enabled: true,
                 blur: 1,
@@ -41,13 +35,6 @@ const PatientStatusDash = () => {
                 show: true,
                 format: 'dd MMM',
             },
-            y: {
-                title: {
-                    formatter: function (val: any) {
-                        return `Price`;
-                    }
-                }
-            }
 
         },
         title: {
@@ -67,11 +54,12 @@ const PatientStatusDash = () => {
         }
 
     };
+
     return (
         <div>
             <div className="grid grid-cols-2 gap-2">
                 <div>
-                    <ReactApexChart
+                    <Chart
                         options={chartOptions}
                         series={chartOptions.series}
                         type="radar"
