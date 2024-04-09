@@ -1,19 +1,50 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import AuthHeader from "~/components/AuthHeader";
-import apiLogin from "~/hooks/api/apiLogin";
+import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from "~/store";
+import { login } from "~/features/Auth/thunks";
+import type { BaseUser } from "~/features/Auth/types";
+import { useEffect } from "react";
+import Alert from '@mui/material/Alert';
+import { setMessage } from '~/features/Auth';
+
+// import type { User } from "~/features/Auth/types";
 const Login = () => {
 
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const message = useAppSelector(state => state?.auth?.message ?? null)
+    const [openAlert, setOpenAlert] = useState(false)
+    useEffect(() => {
+        if (message?.content && message.type !== null) {
+            setOpenAlert(true)
+            setTimeout(() => {
+                setOpenAlert(false)
+                dispatch(setMessage({ type: null, content: '' }))
+            }, 3000)
+        }
+    }, [message])
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const email = e.currentTarget.email.value;
-        const password = e.currentTarget.password.value;
-        const res = await apiLogin(email, password);
-        console.log(res);
+        if (!e.currentTarget.email.value)
+            return dispatch(setMessage({ type: 'error', content: 'Email is required' }));
+        if (!e.currentTarget.password.value)
+            return dispatch(setMessage({ type: 'error', content: 'Password is required' }));
+        const user: BaseUser = {
+            email: e.currentTarget.email.value,
+            password: e.currentTarget.password.value,
+        };
 
-        if (res) {
-            console.log("Login success");
-        }
+        dispatch(login(user));
     }
+    const isAuthenticated = useAppSelector(state => state?.auth?.isAuthenticated ?? false)
+    const isAuthenticating = useAppSelector(state => state?.auth?.isAuthenticating ?? true)
+
+    useEffect(() => {
+        if (isAuthenticated && !isAuthenticating) {
+            navigate('/');
+        }
+    }, [isAuthenticated, isAuthenticating])
     return (
         <section className='bg-gray-50 dark:bg-gray-900 h-full'>
             <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
@@ -68,6 +99,13 @@ const Login = () => {
                                     Forgot password?
                                 </a>
                             </div>
+                            {
+                                openAlert && message?.content && message?.type && (
+                                    <Alert severity={message.type} >
+                                        {message.content}
+                                    </Alert>
+                                )
+                            }
                             <button
                                 type='submit'
                                 className='w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'

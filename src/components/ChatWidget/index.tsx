@@ -1,5 +1,5 @@
 import React from "react";
-import useChatState from "~/hooks/useChatState";
+import useChatState from "~/lib/hooks/useChatState";
 import TextMessage from "./TextMessage";
 import { RiSendPlaneFill } from "react-icons/ri";
 

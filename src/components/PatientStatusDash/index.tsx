@@ -6,14 +6,14 @@ const PatientStatusDash = () => {
     const chartOptions = {
         // Define your chart options here
         series: [{
-            name: 'Series 1',
-            data: [80, 50, 30, 40, 100, 20],
+            name: 'Lan 1',
+            data: [50, 30, 40, 100, 20],
         }, {
-            name: 'Series 2',
-            data: [20, 30, 40, 80, 20, 80],
+            name: 'Lan 2',
+            data: [30, 40, 80, 20, 80],
         }, {
-            name: 'Series 3',
-            data: [44, 76, 78, 13, 43, 10],
+            name: 'Lan 3',
+            data: [76, 78, 13, 43, 10],
         }],
         grid: {
             show: false
@@ -37,9 +37,6 @@ const PatientStatusDash = () => {
             },
 
         },
-        title: {
-            text: 'Radar Chart - Multi Series'
-        },
         stroke: {
             width: 2
         },
@@ -47,10 +44,10 @@ const PatientStatusDash = () => {
             opacity: 0.1
         },
         markers: {
-            size: 2
+            size: 4
         },
         xaxis: {
-            categories: ['2011', '2012', '2013', '2014', '2015', '2016']
+            categories: ['Van dong tho', 'Van dong tinh', 'Bat chuoc va hoc', 'Ca nhan xa hoi', 'Giao tiep ngon ngu']
         }
 
     };

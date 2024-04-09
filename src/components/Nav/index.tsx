@@ -1,11 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo.png';
+import { useAppDispatch, useAppSelector } from "~/store";
+import { logout } from "~/features/Auth/thunks";
 
 const Nav = () => {
     const [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
     const userMenuRef = useRef<HTMLDivElement>(null);
+    const dispatch = useAppDispatch();
+    const user = useAppSelector(state => state?.auth?.user)
 
+
+    const handleLogout = () => {
+        dispatch(logout());
+
+    }
     const handleUserMenu = () => {
         setIsOpenUserMenu(true);
     };
@@ -23,11 +32,11 @@ const Nav = () => {
         };
     }, []);
 
-    const user = {
-        name: 'Do Do',
-        email: 'dodo@dodo.com',
-        token: ''
-    };
+    // const user = {
+    //     name: 'Do Do',
+    //     email: 'dodo@dodo.com',
+    //     token: ''
+    // };
 
     type NavItem =
         {
@@ -96,8 +105,7 @@ const Nav = () => {
                     current: false
                 };
             }
-        }
-        );
+        });
         setAuthItems(newAuthItems);
         setNavItems(newNavItems);
     }
@@ -112,17 +120,18 @@ const Nav = () => {
 
                 {/* user */}
                 {
-                    user.token ? (<div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                        <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button"
+                    user?.email ? (<div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                        <button type="button" className="flex items-center text-sm rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button"
                             onClick={handleUserMenu}
                         >
                             <span className="sr-only">Open user menu</span>
-                            <img className="w-8 h-8 rounded-full" src={logo} alt="user photo" />
+                            <img className="w-8 h-8 rounded-full" src={user.avatar || logo} alt="user photo" />
+                            <span className="block text-sm text-gray-900 dark:text-white py-2 px-3 uppercase">{user.full_name}</span>
                         </button>
                         {isOpenUserMenu && (
                             <div ref={userMenuRef} className="absolute top-10 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 " id="user-dropdown">
                                 <div className="px-4 py-3">
-                                    <span className="block text-sm text-gray-900 dark:text-white">{user.name}</span>
+                                    <span className="block text-sm text-gray-900 dark:text-white">{user.full_name}</span>
                                     <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{user.email}</span>
                                 </div>
                                 <ul className="py-2" aria-labelledby="user-menu-button">
@@ -136,7 +145,7 @@ const Nav = () => {
                                         <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
                                     </li>
                                     <li>
-                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                                        <div onClick={handleLogout} className="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</div>
                                     </li>
                                 </ul>
                             </div>
