@@ -5,13 +5,15 @@ import Login from '~/pages/Auth/login'
 import SignUp from '~/pages/Auth/signup'
 import Contact from '~/pages/Contact'
 import QuestionSection from '~/sections/question'
+import Patient from '~/pages/Patient'
 const config = {
   home: '/',
   user: '/user',
   login: '/login',
   register: '/signup',
   contact: '/contact',
-  asqvn: '/user/asqvn/:id'
+  asqvn: '/asqvn/:id',
+  patient: '/patient/:id',
 }
 
 const routes = [
@@ -49,6 +51,12 @@ const routes = [
     path: config.asqvn,
     exact: true,
     component: QuestionSection,
+    layout: DefaultLayout
+  },
+  {
+    path: config.patient,
+    exact: true,
+    component: Patient,
     layout: DefaultLayout
   }
 ]

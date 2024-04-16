@@ -46,7 +46,7 @@ const SignUp = () => {
             phone_number: e.currentTarget.phone_num.value,
             avatar: null,
             gender: null,
-            role: null
+            role: 'Phụ huynh'
         }
         dispatch(register(user));
     }

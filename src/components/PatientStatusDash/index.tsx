@@ -7,13 +7,13 @@ const PatientStatusDash = () => {
         // Define your chart options here
         series: [{
             name: 'Lan 1',
-            data: [50, 30, 40, 100, 20],
+            data: [50, 30, 40, 100, 20, 40],
         }, {
             name: 'Lan 2',
-            data: [30, 40, 80, 20, 80],
+            data: [30, 40, 80, 20, 80, 30],
         }, {
             name: 'Lan 3',
-            data: [76, 78, 13, 43, 10],
+            data: [76, 78, 13, 43, 10, 70],
         }],
         grid: {
             show: false

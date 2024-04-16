@@ -1,4 +1,3 @@
-import { avatar } from '@material-tailwind/react'
 import { z } from 'zod'
 
 const baseUserSchema = z.object({
@@ -12,7 +11,7 @@ const userSchema = z.object({
   full_name: z.string().nullable(),
   gender: z.boolean().nullable(),
   phone_number: z.string().nullable(),
-  role: z.string().nullable()
+  role: z.string().default('Phụ huynh')
 })
 const userRegisterSchema = userSchema.extend({
   password: z.string()

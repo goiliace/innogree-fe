@@ -1,13 +1,14 @@
 import DualLayout from '~/layouts/DualLayout';
-import UserInfoCard from '~/components/UserInfoCard';
-import PatientStatusDash from '~/components/PatientStatusDash';
+import { UserInfoCard } from '~/components/UserInfoCard';
+// import PatientStatusDash from '~/components/PatientStatusDash';
+import PatientHome from '~/components/PatientHome';
 
 
 const PatientDashboard = () => {
 
     return (
         <DualLayout
-            childrenA={<PatientStatusDash />}
+            childrenA={<PatientHome />}
             childrenB={<UserInfoCard />}
         />
     )
