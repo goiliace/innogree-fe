@@ -10,7 +10,7 @@ const QuestionSection = () => {
     const params = useParams();
     console.log(params.id);
     const dispatch = useAppDispatch();
-    const token = useAppSelector(state => state.auth.token);
+    const token = localStorage.getItem('token');
     useEffect(() => {
         dispatch(fetchQuestions({ token: token as string, patient_id: params.id as string }));
     }, [dispatch]);

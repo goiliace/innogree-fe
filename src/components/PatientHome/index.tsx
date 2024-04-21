@@ -5,7 +5,7 @@ import { useAppSelector, useAppDispatch } from "~/store";
 const PatientHome = () => {
     const dispatch = useAppDispatch();
     const patients = useAppSelector(state => state.patient.patients);
-    const token = useAppSelector(state => state.auth.token);
+    const token = localStorage.getItem('token');
     useEffect(() => {
         dispatch(getPatients(token as string));
     }, [token]);

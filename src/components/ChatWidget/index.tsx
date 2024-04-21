@@ -38,7 +38,7 @@ const ChatInput: React.FC<{ handleSendMessage: (e: React.FormEvent<HTMLFormEleme
 
 function ChatWidget() {
     const { isOpen, openChat, closeChat } = useChatState();
-    const token = useAppSelector(state => state.auth.token);
+    const token = localStorage.getItem('token');
     const user = useAppSelector(state => state.auth.user);
     const dispatch = useAppDispatch();
 

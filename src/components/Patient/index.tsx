@@ -19,7 +19,7 @@ const AddPatientBtn = () => {
     const handleClose = () => {
         setOpen(false);
     };
-    const token = useAppSelector(state => state.auth.token);
+    const token = localStorage.getItem('token');
     const handleCreatePatient = async (e: React.FormEvent<HTMLFormElement>) => {
         // create patient
         e.preventDefault();
