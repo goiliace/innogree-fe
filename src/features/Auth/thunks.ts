@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axiosInstance from '~/lib/api/axios'
-import Cookies from 'js-cookie'
 
 import { setIsAuthenticated, setIsAuthenticating, setToken, setUser, setMessage } from '.'
 import type { BaseUser, User } from './types'
@@ -43,11 +42,11 @@ export const validateUser = createAsyncThunk('auth/validateUser', async (token: 
     const user = res.data
 
     // Save `token` & `user` to localStorage
-    // localStorage.setItem('token', token)
-    // localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('token', token)
+    localStorage.setItem('user', JSON.stringify(user))
     // to cokies
-    Cookies.set('token', token, { expires: 7, secure: true })
-    Cookies.set('user', JSON.stringify(user), { expires: 7, secure: true })
+    // Cookies.set('token', token, { expires: 7, secure: true })
+    // Cookies.set('user', JSON.stringify(user), { expires: 7, secure: true })
 
     // Dispatch `authReducer` Values to Redux Store
     dispatch(setIsAuthenticated(true))
@@ -72,8 +71,10 @@ export const logout = createAsyncThunk('auth/logout', async (_, { dispatch }) =>
   dispatch(setIsAuthenticating(true))
 
   // Clear localStorage
-  Cookies.remove('token')
-  Cookies.remove('user')
+  // Cookies.remove('token')
+  // Cookies.remove('user')
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
 
   // Dispatch `authReducer` Values to Redux Store
   dispatch(setIsAuthenticated(false))

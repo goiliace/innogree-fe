@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import dayjs from 'dayjs';
-import { useAppDispatch, useAppSelector } from "~/store";
+import { useAppDispatch } from "~/store";
 import type { Patient, BasePatient } from "~/features/Patient/types";
 import { createPatient } from "~/features/Patient/thunks";
 
