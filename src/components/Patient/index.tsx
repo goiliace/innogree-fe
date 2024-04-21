@@ -28,12 +28,12 @@ const AddPatientBtn = () => {
             name_patient: e.currentTarget.full_name.value,
             dob: dayjs(e.currentTarget.dob.value).format('YYYY-MM-DD'),
             address_patient: e.currentTarget.address.value,
-            avatar: e.currentTarget.avatar.files[0]
+            avatar: e.currentTarget.avatar.files[0] ? e.currentTarget.avatar.files[0] : ''
 
         }
         console.log(patient);
         dispatch(createPatient({ patient, token: token as string }));
-        handleClose();
+        // handleClose();
     }
 
     return (
@@ -70,7 +70,7 @@ const AddPatientBtn = () => {
                             </div>
                             <div className="mb-5 mx-8 flex items-center gap-5">
                                 <label htmlFor="avatar" className="text-lg text-gray-900 dark:text-white w-48">Avatar</label>
-                                <input type="file" id="avatar" name="avatar" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[56px] w-96" placeholder="Ngay inh" accept="image/*" required />
+                                <input type="file" id="avatar" name="avatar" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[56px] w-96" placeholder="Ngay inh" accept="image/*" />
                             </div>
                             <div className="mb-5 mx-8 flex items-center gap-5">
                                 <label htmlFor="address" className="text-lg text-gray-900 dark:text-white w-48">Địa chỉ</label>

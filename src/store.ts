@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 // Import Reducers
 import authReducer from '~/features/Auth'
 import patiantRedicer from '~/features/Patient'
+import chatReducer from '~/features/Chat'
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    patient: patiantRedicer
+    patient: patiantRedicer,
+    chat: chatReducer,
   }
 })
 

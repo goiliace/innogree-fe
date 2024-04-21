@@ -6,6 +6,7 @@ const baseUserSchema = z.object({
 })
 
 const userSchema = z.object({
+  id: z.string().nullable(),
   email: z.string(),
   avatar: z.string().nullable(),
   full_name: z.string().nullable(),

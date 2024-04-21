@@ -53,7 +53,6 @@ export const validateUser = createAsyncThunk('auth/validateUser', async (token: 
     dispatch(setIsAuthenticated(true))
     dispatch(setToken(token))
     dispatch(setUser(user))
-
     // Set Is Authenticating `false`
     dispatch(setIsAuthenticating(false))
   } catch (err) {

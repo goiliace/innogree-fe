@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { PatientList, Patient } from './types'
+import { PatientList, Patient, QuestionSet } from './types'
 
 
 const initialState: PatientList = {
     isLoading: false,
     patients: [],
-    currentPatient: null
+    currentPatient: null,
+    questions: []
 }
 const patientSlice = createSlice({
     name: 'patients',
@@ -33,9 +34,11 @@ const patientSlice = createSlice({
         },
         setPatient: (state, action: PayloadAction<Patient>) => {
             state.currentPatient = action.payload
+        },
+        setQuestions: (state, action: PayloadAction<QuestionSet[]>) => {
+            state.questions = action.payload
         }
-
     }
 })
 export default patientSlice.reducer
-export const { setPatients, addPatient, updatePatient, deletePatient, setLoading, setPatient } = patientSlice.actions
+export const { setPatients, addPatient, updatePatient, deletePatient, setLoading, setPatient, setQuestions } = patientSlice.actions

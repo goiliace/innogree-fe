@@ -4,15 +4,22 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import React from 'react';
 import Pagination from '@mui/material/Pagination';
-import { QuestionType, QuestionProps, FromQuestionProps } from './interface';
-
+import { QuestionProps } from './interface';
+import type { QuestionSet, Question } from '~/features/Patient/types';
 const values = {
     '0': 'Có',
     '1': 'Thỉnh thoảng',
     '2': 'Không thường xuyên'
 };
 
-const Question: React.FC<QuestionProps> = ({ id, question, answer, handleChange }) => {
+export interface FromQuestionProps {
+    questions: QuestionSet[]
+    currentPage: number
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+    handleChange: (id: string, newAnswer: string) => void
+    handlePageChange: (value: number) => void
+}
+const QuestionFrom: React.FC<QuestionProps> = ({ id, question, answer, handleChange }) => {
     return (
         <FormControl component="fieldset">
             <span className="text-lg font-semibold">
@@ -37,25 +44,30 @@ const Question: React.FC<QuestionProps> = ({ id, question, answer, handleChange 
         </FormControl>
     );
 }
-const FromQuestion: React.FC<FromQuestionProps> = ({ questions, currentPage, questionsPerPage, handleSubmit, handleChange, handlePageChange }) => {
+const FromQuestion: React.FC<FromQuestionProps> = ({ questions, currentPage, handleSubmit, handleChange, handlePageChange }) => {
     return (
         <div>
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg ">
                 <ul className="space-y-6">
-                    {questions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage).map((question: QuestionType) => (
-                        <li key={question.id} className="flex items-center">
-                            <Question
-                                id={question.id}
-                                question={question.text}
-                                answer={question.answer}
-                                handleChange={(newAnswer: string) => handleChange(question.id, newAnswer)}
-                            />
-                        </li>
-                    ))}
+                    <h1>
+                        {questions[currentPage].name}
+                    </h1>
+                    {
+                        questions[currentPage].qset.map((q: Question) => (
+                            <li key={q.id_ques} className="flex items-center">
+                                <QuestionFrom
+                                    id={q.id_ques}
+                                    question={q.question}
+                                    answer={'1'}
+                                    handleChange={(newAnswer: string) => handleChange(q.id_ques, newAnswer)}
+                                />
+                            </li>
+                        ))
+                    }
                 </ul>
                 <div className="mt-4">
                     <Pagination
-                        count={Math.ceil(questions.length / questionsPerPage)}
+                        count={Math.ceil(questions.length)}
                         onChange={(_, value) => handlePageChange(value)}
                         page={currentPage + 1}
                     />

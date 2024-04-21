@@ -1,11 +1,11 @@
-// Define a type for a single question
+// // Define a type for a single question
 export type QuestionType = {
   id: number
   text: string
   answer: string
 }
 export interface QuestionProps {
-  id: number
+  id: string
   question: string
   answer: string
   handleChange: (newAnswer: string) => void

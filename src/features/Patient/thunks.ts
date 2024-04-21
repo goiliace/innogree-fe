@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axiosInstance from '~/lib/api/axios'
 import type { BasePatient } from './types'
-import { setPatients } from './index'
+import { setPatients, setQuestions } from './index'
 import { setLoading } from '~/features/Patient/'
 
 export const createPatient = createAsyncThunk('patient/create', async ({
@@ -48,5 +48,20 @@ export const getPatients = createAsyncThunk('patient/get', async (token: string,
         dispatch(setLoading(false))
 
     }
-}
-)
+})
+
+export const fetchQuestions = createAsyncThunk('patient/getQuestions', async ({ token, patient_id }: { token: string, patient_id: string }, { dispatch }) => {
+    try {
+        const response = await axiosInstance.get('/patient/questions?patient_id=' + patient_id, {
+            headers: {
+                Authorization: `Bearer ${token}`
+
+            }
+        })
+
+
+        dispatch(setQuestions(response.data))
+    } catch (error) {
+        console.log(error)
+    }
+})
