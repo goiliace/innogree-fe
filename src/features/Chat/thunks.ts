@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { URL } from '~/lib/api/constants';
 import { v4 as uuid } from "uuid";
-import { addChat, pushHistory } from '.';
+import { pushHistory } from '.';
 import type { User } from '~/features/Auth/types';
 export const fetchChat = createAsyncThunk(
     'chat/fetch',

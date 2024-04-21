@@ -17,7 +17,7 @@ export const createPatient = createAsyncThunk('patient/create', async ({
     formData.append('avatar', patient.avatar)
 
     try {
-        const response = await axiosInstance.post('/user/create_patient_profile', formData, {
+        await axiosInstance.post('/user/create_patient_profile', formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Accept': 'application/json',

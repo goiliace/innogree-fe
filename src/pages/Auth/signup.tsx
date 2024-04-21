@@ -40,6 +40,7 @@ const SignUp = () => {
             return;
         }
         const user: UserRegister = {
+            id: null,
             email: e.currentTarget.email.value,
             full_name: e.currentTarget.full_name.value,
             password: e.currentTarget.password.value,

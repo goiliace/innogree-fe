@@ -1,6 +1,4 @@
-import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '~/store';
-import { useEffect } from 'react';
 import PatientDashboard from "~/sections/patientDashboard"
 
 export default function App() {

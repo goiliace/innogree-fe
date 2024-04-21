@@ -20,11 +20,12 @@ const QuestionSection = () => {
     // const [questions, setQuestions] = useState(fakeQuestion);
 
     const [currentPage, setCurrentPage] = useState(0);
-    const [completedQuestions, setCompletedQuestions] = useState<string[]>([]);
+    // const [completedQuestions, setCompletedQuestions] = useState<string[]>([]);
+    const completedQuestions: string[] = [];
     const handleChange = (id: string, newAnswer: string) => {
         // setQuestions(questions.map(q => q.id === id ? { ...q, answer: newAnswer } : q));
         // setCompletedQuestions(prev => [...prev, id]);
-
+        console.log(id, newAnswer);
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
